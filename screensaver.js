@@ -177,3 +177,23 @@ timer++;
 
 
 
+//random dots
+
+
+function randomDots() {
+    let y = Math.randomRange(0, 4)
+    let x = Math.randomRange(0, 4)
+    for (let k = 0; k <= 255; k += 25.5) {
+        led.plotBrightness(x, y, k)
+        basic.pause(100);
+    }
+    for (let j = 255; j >= 0; j -= 25.5) {
+        led.plotBrightness(x, y, j);
+        basic.pause(100);
+    }
+}
+
+randomDots();
+
+
+

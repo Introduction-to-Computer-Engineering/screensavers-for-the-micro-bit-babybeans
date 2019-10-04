@@ -115,5 +115,8 @@ This screensaver displays a gradient wave that starts from the top of the led di
 
 The rotating line screensaver displays a line that rotates around a random set of coordinates in the line.
 
+### SS 3
+The  random dot screensaver displays an led one at a time that gradually appears and then disappears.
+
 ## Demo URL
 
