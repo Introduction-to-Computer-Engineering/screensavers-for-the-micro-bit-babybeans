@@ -109,11 +109,11 @@ This assignment asks you to design a program and implement it in micro:bit JavaS
 
 ### SS 1
 
-_[Your description of screensaver 1]_
+This screensaver displays a gradient wave that starts from the top of the led display and  ends  at the bottom.
 
 ### SS 2 
 
-_[And so on]_
+The rotating line screensaver displays a line that rotates around a random set of coordinates in the line.
 
 ## Demo URL
 

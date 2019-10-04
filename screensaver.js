@@ -1,3 +1,5 @@
+
+//gradient wave
 function lightWaveBase() {
     let d = 50
     for (let k = 0; k <= 255; k += 25.5) {
@@ -78,3 +80,100 @@ function lightWave() {
     }
 }
 lightWave();
+
+
+
+
+
+
+//rotating line
+
+let x = 2;
+let y = 2;
+let b = 0;
+
+
+function flatline() {
+    basic.clearScreen();
+    led.setBrightness(b)
+    led.plot(x, y);
+    led.plot(x - 1, y);
+    led.plot(x - 2, y);
+    led.plot(x - 3, y);
+    led.plot(x - 4, y);
+    led.plot(x - 5, y);
+
+    led.plot(x + 1, y);
+    led.plot(x + 2, y);
+    led.plot(x + 3, y);
+    led.plot(x + 4, y);
+    led.plot(x + 5, y)
+    basic.pause(500)
+}
+
+function vertline() {
+    basic.clearScreen();
+    led.setBrightness(255)
+    led.plot(x, y);
+    led.plot(x, y - 1);
+    led.plot(x, y - 2)
+    led.plot(x, y - 3);
+    led.plot(x, y - 4);
+    led.plot(x, y - 5);
+
+    led.plot(x, y + 1);
+    led.plot(x, y + 2);
+    led.plot(x, y + 3);
+    led.plot(x, y + 4);
+    led.plot(x, y + 5);
+    basic.pause(500)
+
+}
+function horizLine1() {
+    basic.clearScreen();
+    led.plot(x, y);
+    led.plot(x + 1, y + 1);
+    led.plot(x + 2, y + 2);
+    led.plot(x + 3, y + 3);
+    led.plot(x + 4, y + 4);
+
+    led.plot(x - 1, y - 1);
+    led.plot(x - 2, y - 2);
+    led.plot(x - 3, y - 3);
+    led.plot(x - 4, y - 4);
+
+
+    basic.pause(500)
+}
+
+function horizLine2() {
+    basic.clearScreen()
+    led.plot(x, y);
+    led.plot(x + 1, y - 1);
+    led.plot(x + 2, y - 2);
+    led.plot(x + 3, y - 3);
+    led.plot(x + 4, y - 4);
+
+    led.plot(x - 1, y + 1);
+    led.plot(x - 2, y + 2);
+    led.plot(x - 3, y + 3);
+    led.plot(x - 4, y + 4);
+    basic.pause(500)
+}
+let timer = 0;
+while(timer != 20){
+x = Math.randomRange(0, 4);
+y = Math.randomRange(0, 4);
+b = 255;
+flatline();
+horizLine1()
+vertline();
+horizLine2();
+flatline();
+horizLine1();
+vertline();
+timer++;
+}
+
+
+
