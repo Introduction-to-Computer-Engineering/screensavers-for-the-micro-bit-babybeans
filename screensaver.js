@@ -81,7 +81,6 @@ function lightWaveBase() {
     }
 }
 
-
 function lightWave() {
     for (let i = 0; i <= 4; i++) {
         x = 2;
@@ -95,8 +94,10 @@ lightWave();
 lightWave();
 lightWave();
 }
-gradientwaves()
 
+input.onGesture(Gesture.Shake, function(){
+    gradientwaves()
+})
 
 
 
@@ -193,9 +194,10 @@ timer++;
 }
 basic.clearScreen();
 }
+
+input.onButtonPressed(Button.AB, function(){
 rotatinglines();
-
-
+})
 
 //random dots
 
@@ -215,8 +217,10 @@ function randomDots() {
     timer++;
     }
 }
+input.onGesture(Gesture.LogoUp, function(){
 
 randomDots();
+})
 
 //moving waves
 
@@ -315,8 +319,9 @@ function bigstream() {
 bigstream()
 basic.clearScreen();
 }
+input.onGesture(Gesture.LogoDown, function(){
 movingwaves();
-
+})
 
 //lastSS
 function lastss() {
@@ -364,5 +369,8 @@ function lastss() {
     run()
     run()
 }
+input.onGesture(Gesture.TiltLeft, function(){
+
 lastss()
+})
 })

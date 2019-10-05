@@ -109,19 +109,20 @@ This assignment asks you to design a program and implement it in micro:bit JavaS
 
 ### SS 1
 
-This screensaver displays a gradient wave that starts from the top of the led display and  ends  at the bottom.
+This screensaver displays a gradient wave that starts from the top of the led display and  ends  at the bottom. To activate this screensaver, shake the microbit after activating sleep mode.
 
 ### SS 2 
 
-The rotating line screensaver displays a line that rotates around a random set of coordinates in the line.
+The rotating line screensaver displays a line that rotates around a random set of coordinates in the line. To activate this  screensaver, press both buttons A and B after activating sleep mode.
 
 ### SS 3
-The  random dot screensaver displays an led one at a time that gradually appears and then disappears.
+The  random dot screensaver displays an led one at a time that gradually appears and then disappears. To  activate  this  screensaver, shift the logo up after activating sleep mode.
 
 ### SS 4
-The moving waves screensaver displays a vertical wave that moves from the left to the right.
+The moving waves screensaver displays a vertical wave that moves from the left to the right. To activate this screensaver, shift  the  logo down after activating sleep mode.
 
 ### SS 5
 This screensaver fills the screen one led by one from the top left to the bottom right. Then a diagonal line from the top left will unplot the leds to the bottom left. A diagonal line from the bottom left will unplot the leds to the top right corner. Then a starburst pattern will be displayed on the screen.
+to  activate  this  screen saver, tilt the microbit to the left after activating sleep mode.
 ## Demo URL
 
