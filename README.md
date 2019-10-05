@@ -118,5 +118,8 @@ The rotating line screensaver displays a line that rotates around a random set o
 ### SS 3
 The  random dot screensaver displays an led one at a time that gradually appears and then disappears.
 
+### SS 4
+The moving waves screensaver displays a vertical wave that moves from the left to the right.
+
 ## Demo URL
 

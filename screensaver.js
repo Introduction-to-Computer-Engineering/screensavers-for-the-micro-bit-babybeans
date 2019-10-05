@@ -195,5 +195,99 @@ function randomDots() {
 
 randomDots();
 
+//moving waves
+
+let x = -2
+let f = 200
+function ledstream1() {
+    basic.clearScreen()
+    led.plot(x + 2, 0)
+    led.plot(x + 1, 1)
+    led.plot(x + 2, 2);
+    led.plot(x + 3, 3);
+    led.plot(x + 2, 4)
+    basic.pause(f)
+
+}
+
+function ledstream2() {
+    basic.clearScreen()
+    led.plot(x + 2, 0)
+    led.plot(x + 2, 1)
+    led.plot(x + 2, 2)
+    led.plot(x + 2, 3)
+    led.plot(x + 2, 4)
+
+    basic.pause(f)
+}
+function ledstream3() {
+    basic.clearScreen()
+    led.plot(x + 2, 0)
+    led.plot(x + 3, 1)
+    led.plot(x + 2, 2)
+    led.plot(x + 1, 3)
+    led.plot(x + 2, 4)
+
+    basic.pause(f)
+}
+
+function bigstream() {
+    ledstream1();
+    ledstream2();
+    ledstream3();
+    ledstream2()
+    ledstream1();
+    ledstream2();
+    x++;
+    ledstream1()
+    ledstream2()
+    ledstream3()
+    ledstream2()
+    x++;
+    ledstream1()
+    ledstream2()
+    ledstream3()
+    ledstream2()
+    x++
+    ledstream1()
+    ledstream2()
+    ledstream3()
+    ledstream2()
+    x++
+    ledstream1()
+    ledstream2()
+    ledstream3()
+    ledstream2()
+    x--
+    ledstream1();
+    ledstream2();
+    ledstream3();
+    ledstream2()
+    ledstream1();
+    ledstream2();
+    x--;
+    ledstream1()
+    ledstream2()
+    ledstream3()
+    ledstream2()
+    x--;
+    ledstream1()
+    ledstream2()
+    ledstream3()
+    ledstream2()
+    x--
+    ledstream1()
+    ledstream2()
+    ledstream3()
+    ledstream2()
+    x--
+    ledstream1()
+    ledstream2()
+    ledstream3()
+    ledstream2()
+}
+
+
+bigstream()
 
 
