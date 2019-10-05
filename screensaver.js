@@ -1,5 +1,17 @@
 
+input.onButtonPressed(Button.B, function(){
+     basic.showString("I'm not asleep.");
+})
+
+
+
+
+input.onButtonPressed(Button.A, function(){
 //gradient wave
+let x = 0;
+let y = 0;
+let b = 255;
+function gradientwaves() {
 function lightWaveBase() {
     let d = 50
     for (let k = 0; k <= 255; k += 25.5) {
@@ -68,9 +80,7 @@ function lightWaveBase() {
         led.plotBrightness(x - 2, y - 1, b - d);
     }
 }
-let x = 0;
-let y = 0;
-let b = 255;
+
 
 function lightWave() {
     for (let i = 0; i <= 4; i++) {
@@ -80,6 +90,13 @@ function lightWave() {
     }
 }
 lightWave();
+lightWave();
+lightWave();
+lightWave();
+lightWave();
+}
+gradientwaves()
+
 
 
 
@@ -92,7 +109,7 @@ let x = 2;
 let y = 2;
 let b = 0;
 
-
+function rotatinglines() {
 function flatline() {
     basic.clearScreen();
     led.setBrightness(b)
@@ -161,7 +178,7 @@ function horizLine2() {
     basic.pause(500)
 }
 let timer = 0;
-while(timer != 20){
+while(timer != 5){
 x = Math.randomRange(0, 4);
 y = Math.randomRange(0, 4);
 b = 255;
@@ -174,13 +191,17 @@ horizLine1();
 vertline();
 timer++;
 }
+basic.clearScreen();
+}
+rotatinglines();
 
 
 
 //random dots
 
-
+let timer = 0
 function randomDots() {
+    while(timer != 20){
     let y = Math.randomRange(0, 4)
     let x = Math.randomRange(0, 4)
     for (let k = 0; k <= 255; k += 25.5) {
@@ -191,6 +212,8 @@ function randomDots() {
         led.plotBrightness(x, y, j);
         basic.pause(100);
     }
+    timer++;
+    }
 }
 
 randomDots();
@@ -199,6 +222,7 @@ randomDots();
 
 let x = -2
 let f = 200
+function movingwaves() {
 function ledstream1() {
     basic.clearScreen()
     led.plot(x + 2, 0)
@@ -289,5 +313,56 @@ function bigstream() {
 
 
 bigstream()
+basic.clearScreen();
+}
+movingwaves();
 
 
+//lastSS
+function lastss() {
+    function threes() {
+        for (let j = 0; j <= 4; j++) {
+            for (let h = 0; h <= 4; h++) {
+                for (let u = 25.5; u <= 255; u += 25.5) {
+                    led.plotBrightness(j, h, u);
+                    basic.pause(100);
+                }
+            }
+        }
+        led.plotAll()
+        let counter = 0
+        while (counter != 5) {
+            led.unplot(counter, counter);
+            basic.pause(100)
+            led.unplot(counter, 4 - counter);
+            basic.pause(100)
+            counter++
+        }
+
+    }
+
+    function run() {
+        basic.clearScreen()
+        led.plot(2, 2);
+        basic.pause(300)
+        led.plot(1, 1)
+        led.plot(3, 1);
+        led.plot(1, 3);
+        led.plot(3, 3);
+        basic.pause(300)
+        basic.clearScreen();
+        led.plot(2, 2);
+        led.plot(0, 0);
+        led.plot(4, 4);
+        led.plot(0, 4);
+        led.plot(4, 0);
+        basic.pause(300)
+        basic.clearScreen();
+    }
+    threes()
+    run()
+    run()
+    run()
+}
+lastss()
+})
