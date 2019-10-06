@@ -122,7 +122,7 @@ The  random dot screensaver displays an led one at a time that gradually appears
 The moving waves screensaver displays a vertical wave that moves from the left to the right. To activate this screensaver, shift  the  logo down after activating sleep mode.
 
 ### SS 5
-This screensaver fills the screen one led by one from the top left to the bottom right. Then a diagonal line from the top left will unplot the leds to the bottom left. A diagonal line from the bottom left will unplot the leds to the top right corner. Then a starburst pattern will be displayed on the screen.
-to  activate  this  screen saver, tilt the microbit to the left after activating sleep mode.
+This screensaver shows a starburst pattern will be displayed on the screen.
+To  activate  this  screen saver, tilt the microbit to the left after activating sleep mode.
 ## Demo URL
 
