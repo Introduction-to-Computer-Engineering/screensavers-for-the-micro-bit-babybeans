@@ -1,7 +1,19 @@
 
+class ScreenSaver {
+    screenSaver: string;
+    constructor(message: string) {
+        this.screenSaver = message;
+    }
+    ss() {
+        return "Run " + this.screenSaver;
+    }
+}
 
 input.onButtonPressed(Button.B, function () {
-    basic.showString("I'm sleeping");
+
+    led.plotAll();
+    basic.clearScreen();
+    basic.showString("I'm not sleeping");
 
 })
 
@@ -20,6 +32,8 @@ input.onButtonPressed(Button.A, function () {
     basic.clearScreen();
 
     input.onGesture(Gesture.Shake, function () {
+        let program1 = new ScreenSaver("gradientwave");
+        console.log(program1.ss());
         basic.clearScreen();
 
         //gradient wave
@@ -114,6 +128,8 @@ input.onButtonPressed(Button.A, function () {
     //rotatinglines
 
     input.onButtonPressed(Button.AB, function () {
+        let program2 = new ScreenSaver("rotatinglines");
+        console.log(program2.ss());
         basic.clearScreen()
         function rotatinglines() {
             function flatline() {
@@ -207,6 +223,8 @@ input.onButtonPressed(Button.A, function () {
 
     //randomdots
     input.onGesture(Gesture.LogoUp, function () {
+        let program3 = new ScreenSaver("randomdots");
+        console.log(program3.ss());
         basic.clearScreen()
         let timer = 0
         function randomdots() {
@@ -227,8 +245,11 @@ input.onButtonPressed(Button.A, function () {
         }
         randomdots();
     })
+    //moving waves
 
     input.onGesture(Gesture.LogoDown, function () {
+        let program4 = new ScreenSaver("movingwaves")
+        console.log(program4.ss());
         basic.clearScreen()
         function movingwaves() {
             function ledstream1() {
@@ -321,6 +342,8 @@ input.onButtonPressed(Button.A, function () {
     })
 
     input.onGesture(Gesture.TiltLeft, function () {
+        let program5 = new ScreenSaver("starburst");
+        console.log(program5.ss());
         basic.clearScreen()
         function bigrun() {
             function run() {
