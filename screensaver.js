@@ -1,4 +1,22 @@
+input.onButtonPressed(Button.B, function () {
+    basic.clearScreen()
+    ss.fromCountdown = 0;
+    ss.bPressed = 1;
+})
 
+input.onButtonPressed(Button.A, function () {
+    ss.reset();
+})
+
+
+function log() {
+    console.log("bPress=" + ss.bPressed);
+    console.log("fromCountdown=" + ss.fromCountdown);
+}
+
+let r = 0
+let y = 0
+let x = 0
 class ScreenSaver {
     screenSaver: string;
     constructor(message: string) {
@@ -6,67 +24,63 @@ class ScreenSaver {
     }
 
     bPressed = 0;
-    timeout = 15;
-
+    timeout = 5;
+    fromCountdown = 0;
     message() {
         return "Run " + this.screenSaver;
     }
 
     stop() {
         this.bPressed = 1;
+
         while (this.bPressed == 1) {
+
             basic.clearScreen();
             led.setBrightness(255);
-            basic.showString("  I'm not sleeping");
+            if (this.fromCountdown == 0) {
+                basic.showString("  I'm not sleeping");
+            }
+            basic.pause(1000);
+            log();
+            //pulse();
         }
+        this.fromCountdown = 0;
+        //this.bPressed = 0;
     }
 
     reset() {
         this.bPressed = 0;
+        this.fromCountdown = 0;
     }
 
     countDown() {
         control.inBackground(function () {
             let counter = 0;
             while (counter <= this.timeout) {
-                basic.pause(1000)
+                if (ss.bPressed != 1) {
+                    basic.pause(1000)
+                }
                 counter++;
             }
-            control.reset();
-            //this.reset();
+            this.fromCountdown = 1;
+            ss.stop();
+            this.bPressed = 0;
+            this.fromCountdown = 0;
+            return;
+
         });
     }
 
 }
-
-
 let ss = new ScreenSaver("Stop it");
-
-
-input.onButtonPressed(Button.B, function () {
-    led.plotAll()
-    basic.clearScreen()
-    ss.stop();
-})
-
-let x = 0;
-let y = 0;
-let b = 255;
-let u = 2;
-let l = 2;
-let r = 0;
-let w = -2;
-let f = 200;
-
-input.onButtonPressed(Button.A, function () {
-    ss.reset();
-})
+let b = 255
+let u = 2
+let l = 2
+let w = -2
+let f = 200
 while (!(input.buttonIsPressed(Button.A))) {
-
-    basic.pause(2000);
+    basic.pause(2000)
     if (input.buttonIsPressed(Button.A)) {
-
-
         input.onGesture(Gesture.Shake, function () {
             let program1 = new ScreenSaver("gradientwave");
             ss.countDown();
@@ -117,8 +131,8 @@ while (!(input.buttonIsPressed(Button.A))) {
 
 
                     }
-                    for (let l = 255; l >= 0; l -= 25.5) {
-                        b = l;
+                    for (let m = 255; m >= 0; m -= 25.5) {
+                        b = m;
                         led.plotBrightness(x, y, b);
                         led.plotBrightness(x + 1, y, b);
                         led.plotBrightness(x + 2, y, b);
@@ -160,12 +174,9 @@ while (!(input.buttonIsPressed(Button.A))) {
                     lightWave();
                 }
             }
-            //led.setBrightness(255)
             gradientwave();
         })
-
-        //rotatinglines
-
+        // rotatinglines
         input.onButtonPressed(Button.AB, function () {
             let program2 = new ScreenSaver("rotatinglines");
             ss.countDown();
@@ -258,8 +269,7 @@ while (!(input.buttonIsPressed(Button.A))) {
             }
             rotatinglines();
         })
-
-        //randomdots
+        // randomdots
         input.onGesture(Gesture.LogoUp, function () {
             let program3 = new ScreenSaver("randomdots");
             ss.countDown();
@@ -268,23 +278,22 @@ while (!(input.buttonIsPressed(Button.A))) {
             function randomdots() {
                 while (ss.bPressed != 1) {
                     if (ss.bPressed == 1) { basic.clearScreen(); return; }
-                    let y = Math.randomRange(0, 4);
-                    let x = Math.randomRange(0, 4);
-                    for (let k = 0; k <= 255; k += 25.5) {
-                        led.plotBrightness(x, y, k)
+                    let z = Math.randomRange(0, 4);
+                    let a = Math.randomRange(0, 4);
+                    for (let n = 0; n <= 255; n += 25.5) {
+                        led.plotBrightness(a, z, n)
                         basic.pause(100)
                     }
 
-                    for (let k = 255; k >= 0; k -= 25.5) {
-                        led.plotBrightness(x, y, k);
+                    for (let o = 255; o >= 0; o -= 25.5) {
+                        led.plotBrightness(a, z, o);
                         basic.pause(100);
                     }
                 }
             }
             randomdots();
         })
-        //moving waves
-
+        // moving waves
         input.onGesture(Gesture.LogoDown, function () {
             let program4 = new ScreenSaver("movingwaves")
             ss.countDown();
@@ -380,7 +389,6 @@ while (!(input.buttonIsPressed(Button.A))) {
             movingwaves();
 
         })
-
         input.onGesture(Gesture.TiltLeft, function () {
             let program5 = new ScreenSaver("starburst");
             ss.countDown();
