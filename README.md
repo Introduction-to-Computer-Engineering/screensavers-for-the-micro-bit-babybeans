@@ -106,10 +106,12 @@ This assignment asks you to design a program and implement it in micro:bit JavaS
 ---
 
 ## Screensavers
+### A
+To display screensavers, the button A has to be pressed for more than 2 seconds. Any screensaver that is displayed can be interrupted by another screensaver. They all can be interrupted by button B. After button B is pressed, Button A needs to be pressed to bring the microbit back into sleep mode.
 
 ### SS 1
 
-This screensaver displays a gradient wave that starts from the top of the led display and  ends  at the bottom. To activate this screensaver, shake the microbit after activating sleep mode.
+This screensaver displays a gradient wave that starts from the top of the led display and  ends  at the bottom. To activate this screensaver, shake the microbit after activating sleep mode. 
 
 ### SS 2 
 
@@ -123,6 +125,8 @@ The moving waves screensaver displays a vertical wave that moves from the left t
 
 ### SS 5
 This screensaver shows a starburst pattern will be displayed on the screen.
-To  activate  this  screen saver, tilt the microbit to the left after activating sleep mode.
+To  activate this screen saver, tilt the microbit to the left after activating sleep mode.
 ## Demo URL
+
+https://imgur.com/gallery/iJoPjvP 
 
