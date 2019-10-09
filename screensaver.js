@@ -3,23 +3,51 @@ class ScreenSaver {
     screenSaver: string;
     constructor(message: string) {
         this.screenSaver = message;
-
-
-
     }
-    ss() {
+
+    bPressed = 0;
+    timeout = 15;
+
+    message() {
         return "Run " + this.screenSaver;
     }
+
+    stop() {
+        this.bPressed = 1;
+        while (this.bPressed == 1) {
+            basic.clearScreen();
+            led.setBrightness(255);
+            basic.showString("  I'm not sleeping");
+        }
+    }
+
+    reset() {
+        this.bPressed = 0;
+    }
+
+    countDown() {
+        control.inBackground(function () {
+            let counter = 0;
+            while (counter <= this.timeout) {
+                basic.pause(1000)
+                counter++;
+            }
+            control.reset();
+            //this.reset();
+        });
+    }
+
 }
 
+
+let ss = new ScreenSaver("Stop it");
+
+
 input.onButtonPressed(Button.B, function () {
-
-    led.plotAll();
-    basic.clearScreen();
-    basic.showString("I'm not sleeping");
-
+    led.plotAll()
+    basic.clearScreen()
+    ss.stop();
 })
-
 
 let x = 0;
 let y = 0;
@@ -30,22 +58,28 @@ let r = 0;
 let w = -2;
 let f = 200;
 
-
+input.onButtonPressed(Button.A, function () {
+    ss.reset();
+})
 while (!(input.buttonIsPressed(Button.A))) {
+
     basic.pause(2000);
     if (input.buttonIsPressed(Button.A)) {
 
+
         input.onGesture(Gesture.Shake, function () {
             let program1 = new ScreenSaver("gradientwave");
-            console.log(program1.ss());
+            ss.countDown();
+            console.log(program1.message());
             basic.clearScreen();
 
             //gradient wave
             function gradientwave() {
 
-
                 function lightWaveBase() {
+
                     let d = 50
+                    if (ss.bPressed == 1) { basic.clearScreen(); return; }
                     for (let k = 0; k <= 255; k += 25.5) {
                         b = k
 
@@ -77,7 +111,7 @@ while (!(input.buttonIsPressed(Button.A))) {
                         led.plotBrightness(x + 2, y - 1, b - d);
                         led.plotBrightness(x - 1, y - 1, b - d);
                         led.plotBrightness(x - 2, y - 1, b - d);
-                        //led.plotBrightness(x, y - 1, b - d);
+
 
                         basic.pause(100)
 
@@ -115,17 +149,18 @@ while (!(input.buttonIsPressed(Button.A))) {
 
 
                 function lightWave() {
+
                     for (let i = 0; i <= 4; i++) {
                         x = 2;
                         y = i;
                         lightWaveBase();
                     }
                 }
-                lightWave();
-                lightWave();
-                lightWave();
-                lightWave();
+                while (ss.bPressed != 1) {
+                    lightWave();
+                }
             }
+            //led.setBrightness(255)
             gradientwave();
         })
 
@@ -133,7 +168,8 @@ while (!(input.buttonIsPressed(Button.A))) {
 
         input.onButtonPressed(Button.AB, function () {
             let program2 = new ScreenSaver("rotatinglines");
-            console.log(program2.ss());
+            ss.countDown();
+            console.log(program2.message());
             basic.clearScreen()
             function rotatinglines() {
                 function flatline() {
@@ -204,8 +240,8 @@ while (!(input.buttonIsPressed(Button.A))) {
                     basic.pause(500);
 
                 }
-                let timer = 0;
-                while (timer != 5) {
+                while (ss.bPressed != 1) {
+                    if (ss.bPressed == 1) { basic.clearScreen(); return; }
                     u = Math.randomRange(0, 4)
                     l = Math.randomRange(0, 4);
                     r = 255;
@@ -216,11 +252,9 @@ while (!(input.buttonIsPressed(Button.A))) {
                     flatline()
                     horizline1()
                     vertline()
-                    timer++;
 
                 }
                 basic.clearScreen();
-
             }
             rotatinglines();
         })
@@ -228,23 +262,23 @@ while (!(input.buttonIsPressed(Button.A))) {
         //randomdots
         input.onGesture(Gesture.LogoUp, function () {
             let program3 = new ScreenSaver("randomdots");
-            console.log(program3.ss());
+            ss.countDown();
+            console.log(program3.message());
             basic.clearScreen()
-            let timer = 0
             function randomdots() {
-                while (timer != 20) {
+                while (ss.bPressed != 1) {
+                    if (ss.bPressed == 1) { basic.clearScreen(); return; }
                     let y = Math.randomRange(0, 4);
                     let x = Math.randomRange(0, 4);
                     for (let k = 0; k <= 255; k += 25.5) {
                         led.plotBrightness(x, y, k)
                         basic.pause(100)
-
                     }
+
                     for (let k = 255; k >= 0; k -= 25.5) {
                         led.plotBrightness(x, y, k);
                         basic.pause(100);
                     }
-                    timer++;
                 }
             }
             randomdots();
@@ -253,8 +287,10 @@ while (!(input.buttonIsPressed(Button.A))) {
 
         input.onGesture(Gesture.LogoDown, function () {
             let program4 = new ScreenSaver("movingwaves")
-            console.log(program4.ss());
+            ss.countDown();
+            console.log(program4.message());
             basic.clearScreen()
+
             function movingwaves() {
                 function ledstream1() {
                     basic.clearScreen();
@@ -263,7 +299,6 @@ while (!(input.buttonIsPressed(Button.A))) {
                     led.plot(w + 2, 2);
                     led.plot(w + 3, 3);
                     led.plot(w + 2, 4);
-
                     basic.pause(f)
 
                 }
@@ -286,7 +321,9 @@ while (!(input.buttonIsPressed(Button.A))) {
                     led.plot(w + 2, 4);
                     basic.pause(f);
                 }
+
                 function bigstream() {
+                    if (ss.bPressed == 1) { basic.clearScreen(); return; }
                     ledstream1()
                     ledstream2()
                     ledstream3()
@@ -336,10 +373,9 @@ while (!(input.buttonIsPressed(Button.A))) {
                     basic.clearScreen();
 
                 }
-                bigstream();
-                bigstream();
-                bigstream();
-
+                while (ss.bPressed != 1) {
+                    bigstream();
+                }
             }
             movingwaves();
 
@@ -347,10 +383,12 @@ while (!(input.buttonIsPressed(Button.A))) {
 
         input.onGesture(Gesture.TiltLeft, function () {
             let program5 = new ScreenSaver("starburst");
-            console.log(program5.ss());
+            ss.countDown();
+            console.log(program5.message());
             basic.clearScreen()
             function bigrun() {
                 function run() {
+                    if (ss.bPressed == 1) { basic.clearScreen(); return; }
                     basic.clearScreen()
                     led.plot(2, 2);
                     basic.pause(300);
@@ -384,23 +422,12 @@ while (!(input.buttonIsPressed(Button.A))) {
                     basic.pause(300)
                     basic.clearScreen()
                 }
-                function runrun() {
+                while (ss.bPressed != 1) {
                     run()
-                    run()
-                    run()
-                    run()
-                    run()
-                    run()
-                    run()
-                    run()
-                    run()
-                }
-                runrun();
-            }
 
+                }
+            }
             bigrun();
         })
-
     }
 }
-
