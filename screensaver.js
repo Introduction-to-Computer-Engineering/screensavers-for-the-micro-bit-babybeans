@@ -12,23 +12,29 @@ input.onButtonPressed(Button.A, function () {
 function log() {
     console.log("bPress=" + ss.bPressed);
     console.log("fromCountdown=" + ss.fromCountdown);
+    console.log("shake=" + ss.shake);
+    console.log("tilt=" + ss.tilt);
+    console.log("ab=" + ss.ab);
+    console.log("logoup=" + ss.logoup);
+    console.log("logodown=" + ss.logodown);
 }
 
 let r = 0
 let y = 0
 let x = 0
 class ScreenSaver {
-    screenSaver: string;
-    constructor(message: string) {
-        this.screenSaver = message;
-    }
+    
+    constructor() { }
 
     bPressed = 0;
-    timeout = 5;
+    shake = 0;
+    tilt = 0;
+    ab = 0;
+    logodown = 0;
+    logoup = 0;
+    timeout = 15;
     fromCountdown = 0;
-    message() {
-        return "Run " + this.screenSaver;
-    }
+   
 
     stop() {
         this.bPressed = 1;
@@ -41,7 +47,8 @@ class ScreenSaver {
                 basic.showString("  I'm not sleeping");
             }
             basic.pause(1000);
-            log();
+            //console.log("In the stop loop")
+            //log();
             //pulse();
         }
         this.fromCountdown = 0;
@@ -61,6 +68,7 @@ class ScreenSaver {
                     basic.pause(1000)
                 }
                 counter++;
+                console.log("In counter loop")
             }
             this.fromCountdown = 1;
             ss.stop();
@@ -71,8 +79,35 @@ class ScreenSaver {
         });
     }
 
+    setScreenSaver(name: string) {
+
+        ss.shake = 0;
+        ss.logodown = 0;
+        ss.logoup = 0;
+        ss.tilt = 0;
+        ss.ab = 0;
+
+        if (name == "shake") {
+            ss.shake = 1;
+        }
+        if (name == "logodown") {
+            ss.logodown = 1;
+        }
+        if (name == "logoup") {
+            ss.logoup = 1;
+        }
+        if (name == "tilt") {
+            ss.tilt = 1;
+        }
+        if (name == "ab") {
+            ss.ab = 1;
+        }
+        ss.bPressed = 0;
+        log();
+    }
+
 }
-let ss = new ScreenSaver("Stop it");
+let ss = new ScreenSaver();
 let b = 255
 let u = 2
 let l = 2
@@ -81,10 +116,14 @@ let f = 200
 while (!(input.buttonIsPressed(Button.A))) {
     basic.pause(2000)
     if (input.buttonIsPressed(Button.A)) {
+
         input.onGesture(Gesture.Shake, function () {
-            let program1 = new ScreenSaver("gradientwave");
+            console.log("Shake Event: running gradientwave");
+            ss.setScreenSaver("shake");
+            ss.fromCountdown = 0;
             ss.countDown();
-            console.log(program1.message());
+
+
             basic.clearScreen();
 
             //gradient wave
@@ -94,6 +133,8 @@ while (!(input.buttonIsPressed(Button.A))) {
 
                     let d = 50
                     if (ss.bPressed == 1) { basic.clearScreen(); return; }
+                    //if (ss.shake != 1) { basic.clearScreen(); return }
+
                     for (let k = 0; k <= 255; k += 25.5) {
                         b = k
 
@@ -171,6 +212,7 @@ while (!(input.buttonIsPressed(Button.A))) {
                     }
                 }
                 while (ss.bPressed != 1) {
+                    if (ss.shake == 0) { basic.clearScreen(); return; }
                     lightWave();
                 }
             }
@@ -178,9 +220,12 @@ while (!(input.buttonIsPressed(Button.A))) {
         })
         // rotatinglines
         input.onButtonPressed(Button.AB, function () {
-            let program2 = new ScreenSaver("rotatinglines");
+            console.log("Button AB Event: running rotatinglines");
+            ss.setScreenSaver("ab")
+            ss.fromCountdown = 0
             ss.countDown();
-            console.log(program2.message());
+
+
             basic.clearScreen()
             function rotatinglines() {
                 function flatline() {
@@ -253,6 +298,7 @@ while (!(input.buttonIsPressed(Button.A))) {
                 }
                 while (ss.bPressed != 1) {
                     if (ss.bPressed == 1) { basic.clearScreen(); return; }
+                    if (ss.ab == 0) { basic.clearScreen(); return; }
                     u = Math.randomRange(0, 4)
                     l = Math.randomRange(0, 4);
                     r = 255;
@@ -271,13 +317,16 @@ while (!(input.buttonIsPressed(Button.A))) {
         })
         // randomdots
         input.onGesture(Gesture.LogoUp, function () {
-            let program3 = new ScreenSaver("randomdots");
+            console.log("LogoUp Event: running randomdots");
+            ss.fromCountdown = 0;
             ss.countDown();
-            console.log(program3.message());
+            ss.setScreenSaver("logoup")
+
             basic.clearScreen()
             function randomdots() {
                 while (ss.bPressed != 1) {
                     if (ss.bPressed == 1) { basic.clearScreen(); return; }
+                    if (ss.logoup != 1) { basic.clearScreen(); return; }
                     let z = Math.randomRange(0, 4);
                     let a = Math.randomRange(0, 4);
                     for (let n = 0; n <= 255; n += 25.5) {
@@ -295,9 +344,11 @@ while (!(input.buttonIsPressed(Button.A))) {
         })
         // moving waves
         input.onGesture(Gesture.LogoDown, function () {
-            let program4 = new ScreenSaver("movingwaves")
+            console.log("LogoDown Event: running movingwaves");
+            ss.setScreenSaver("logodown")
+            ss.fromCountdown = 0;
             ss.countDown();
-            console.log(program4.message());
+
             basic.clearScreen()
 
             function movingwaves() {
@@ -333,6 +384,7 @@ while (!(input.buttonIsPressed(Button.A))) {
 
                 function bigstream() {
                     if (ss.bPressed == 1) { basic.clearScreen(); return; }
+                    if (ss.logodown != 1) { basic.clearScreen(); return; }
                     ledstream1()
                     ledstream2()
                     ledstream3()
@@ -383,6 +435,7 @@ while (!(input.buttonIsPressed(Button.A))) {
 
                 }
                 while (ss.bPressed != 1) {
+                    if (ss.logodown == 0) { basic.clearScreen(); return; }
                     bigstream();
                 }
             }
@@ -390,13 +443,17 @@ while (!(input.buttonIsPressed(Button.A))) {
 
         })
         input.onGesture(Gesture.TiltLeft, function () {
-            let program5 = new ScreenSaver("starburst");
+            console.log("TiltLeft Event: running starburst");
+            ss.setScreenSaver("tilt")
+            ss.fromCountdown = 0;
             ss.countDown();
-            console.log(program5.message());
+
+
             basic.clearScreen()
             function bigrun() {
                 function run() {
                     if (ss.bPressed == 1) { basic.clearScreen(); return; }
+                    //if (ss.tilt != 1) { basic.clearScreen(); return; }
                     basic.clearScreen()
                     led.plot(2, 2);
                     basic.pause(300);
@@ -431,6 +488,7 @@ while (!(input.buttonIsPressed(Button.A))) {
                     basic.clearScreen()
                 }
                 while (ss.bPressed != 1) {
+                    if (ss.tilt == 0) { basic.clearScreen(); return; }
                     run()
 
                 }
