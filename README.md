@@ -128,5 +128,6 @@ This screensaver shows a starburst pattern will be displayed on the screen.
 To  activate this screen saver, tilt the microbit to the left after activating sleep mode.
 ## Demo URL
 
-https://imgur.com/gallery/iJoPjvP 
+
+https://imgur.com/gallery/xYTn9y4
 
